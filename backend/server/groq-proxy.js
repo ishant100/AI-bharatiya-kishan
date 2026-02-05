@@ -8,20 +8,30 @@ import authRoutes from "../routes/auth.js";
 
 // If Node < 18, uncomment these 2 lines and run: npm i node-fetch@3
 // // @ts-ignore
-// import fetch from "node-fetch";
-connectDB();
+ import fetch from "node-fetch";
+connectDB().catch(err => {
+  console.error("MongoDB connection failed:", err);
+  process.exit(1); // force crash so Render shows error
+});
 
 const app = express();
 app.use(cors({
-  origin:[
-    "http://localhost:8080",
-    "https://ai-bharatiya-kishan-1.onrender.com"
-  ],    
-  credentials:true,
+  origin: [
+    "http://localhost:5173",
+    "https://kishan-ai-frontend.onrender.com"
+  ],
+  credentials: true,
 }));
+
 //app.use(express.json());
 app.use(express.json({ limit: "5mb" }));
 app.use("/api/auth", authRoutes);
+
+
+//
+app.get("/", (_req, res) => {
+  res.json({ status: "Backend running" });
+});
 
 // -------------------------------
 // Health
@@ -176,6 +186,12 @@ app.get("/api/prices", async (req, res) => {
     res.status(500).json({ error: "server_error", message: e?.message || String(e) });
   }
 });
+
+app.use((err, _req, res, _next) => {
+  console.error("Unhandled error:", err);
+  res.status(500).json({ error: "server_error" });
+});
+
 
 // -------------------------------
 // Start server
