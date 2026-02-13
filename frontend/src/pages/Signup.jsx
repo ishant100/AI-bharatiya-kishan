@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +9,12 @@ import { useAuth } from "@/context/AuthContext";
 import heroImage from "@/assets/agriculture-hero.jpg";
 
 export default function Signup() {
+
+
+  useEffect(() => {
+    console.log("ENV:", import.meta.env.VITE_BACKEND_URL);
+  }, []);
+  
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
