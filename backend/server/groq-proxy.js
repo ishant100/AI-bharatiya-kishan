@@ -18,7 +18,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://ai-bharatiya-kishan-1.onrender.com
+    "https://ai-bharatiya-kishan-1.onrender.com"
   ],
   credentials: true,
 }));
