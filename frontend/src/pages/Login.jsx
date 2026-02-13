@@ -15,16 +15,18 @@ export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError("");
+ const handleLogin = async (e) => {
+  e.preventDefault();
+  setError("");
 
-    const res = await fetch("/api/auth/login", {
+  const res = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,
+    {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
-    });
-
+    }
+  );
     const data = await res.json();
     if (res.ok) {
       login(data.token);
