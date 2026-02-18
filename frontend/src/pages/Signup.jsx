@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,12 +8,6 @@ import { useAuth } from "@/context/AuthContext";
 import heroImage from "@/assets/agriculture-hero.jpg";
 
 export default function Signup() {
-
-
-  useEffect(() => {
-    console.log("ENV:", import.meta.env.VITE_BACKEND_URL);
-  }, []);
-  
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,17 +16,13 @@ export default function Signup() {
   const { login } = useAuth();
 
   const handleSignup = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const res = await fetch(
-    `${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`,
-    {
+    const res = await fetch("/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
-    }
-  );
-
+    });
 
     const data = await res.json();
     if (res.ok) {
