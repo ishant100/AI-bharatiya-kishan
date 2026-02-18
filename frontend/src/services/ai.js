@@ -46,7 +46,7 @@
 // src/services/ai.js
 // Client that calls backend AI safely
 
-const API_URL = "/api/ai";
+const API_URL =`${import.meta.env.VITE_BACKEND_URL}/api/ai`;
 
 export async function getAIResponse(input) {
   try {
