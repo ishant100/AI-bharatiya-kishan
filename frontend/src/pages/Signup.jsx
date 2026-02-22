@@ -116,7 +116,6 @@
 // }
 
 
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -126,6 +125,8 @@ import { useAuth } from "@/context/AuthContext";
 import heroImage from "@/assets/agriculture-hero.jpg";
 
 export default function Signup() {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -139,22 +140,16 @@ export default function Signup() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch(`${BACKEND_URL}/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
       });
 
-      const text = await res.text();
-
-      if (!text) {
-        throw new Error("Empty response from server");
-      }
-
-      const data = JSON.parse(text);
+      const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || "Signup failed");
+        alert(data?.message || "Signup failed");
         setLoading(false);
         return;
       }
@@ -164,7 +159,7 @@ export default function Signup() {
 
     } catch (error) {
       console.error("Signup error:", error);
-      alert("Something went wrong. Please try again.");
+      alert("Server error. Please try again.");
     }
 
     setLoading(false);
