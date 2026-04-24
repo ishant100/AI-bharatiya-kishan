@@ -22,10 +22,10 @@ export const Footer = () => (
       <div>
         <h3 className="font-semibold text-lg mb-3">Contact</h3>
         <p className="flex items-center gap-2 text-sm mb-2">
-          <Phone className="w-4 h-4" /> +91 98765 43210
+          <Phone className="w-4 h-4" /> +91 93011 05525
         </p>
         <p className="flex items-center gap-2 text-sm mb-2">
-          <Mail className="w-4 h-4" /> support@BHARTI-kisan ai.com
+          <Mail className="w-4 h-4" /> ishantsoni130@gmail.com
         </p>
         <p className="flex items-center gap-2 text-sm">
           <MapPin className="w-4 h-4" /> BHARTI-kisan ai HQ, India
@@ -45,6 +45,6 @@ export const Footer = () => (
     <div className="mt-8 border-t border-emerald-400 pt-4 text-center text-xs text-emerald-800">
       © {new Date().getFullYear()}BHARTI-kisan ai. All rights reserved.
     </div>
-    <div className="text-center">by Ishant</div>
+    <div className="text-center">by Ishant Soni & Muskan Mishra only</div>
   </footer>
 );
